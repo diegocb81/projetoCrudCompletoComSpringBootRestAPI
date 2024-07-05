@@ -91,12 +91,23 @@ public class GreetingsController {
     	return new ResponseEntity<String>("Usuário deletado com sucesso", HttpStatus.OK);
     }
     
-    @GetMapping(value = "buscaruserid") /*Mapeia a URL*/
+    @GetMapping(value = "buscarUserId") /*Mapeia a URL*/
     @ResponseBody /*Descrição da resposta*/
-    public ResponseEntity<Usuario> buscaruserid(@RequestParam(name = "userid") Long userId) { /*Recebe os dados para consultar*/
+    public ResponseEntity<Usuario> buscarUserId(@RequestParam(name = "userid") Long userId) { /*Recebe os dados para consultar*/
     	
     	Usuario usuario = usuarioRepository.findById(userId).get();
     	
     	return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
     }
+    
+    @GetMapping(value = "buscarPorNome") /*Mapeia a URL*/
+    @ResponseBody /*Descrição da resposta*/
+    public ResponseEntity<List<Usuario>> buscarPorNome(@RequestParam(name = "name") String name) { /*Recebe os dados para consultar*/
+    	
+    	List<Usuario> usuario = usuarioRepository.buscarPorNome(name.trim().toUpperCase());
+    	
+    	return new ResponseEntity<List<Usuario>>(usuario, HttpStatus.OK);
+    }
+    
+    
 }
